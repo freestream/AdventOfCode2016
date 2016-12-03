@@ -6,8 +6,7 @@ $group      = array_fill(0, 3, []);
 $rowCount   = 0;
 
 while (false !== ($line = fgets($fp))) {
-    $line   = trim($line);
-    $sides  = preg_split('/(\s+)/', $line);
+    $sides = preg_split('/(\s+)/', trim($line));
 
     $rowCount++;
 
@@ -19,11 +18,9 @@ while (false !== ($line = fgets($fp))) {
         $group[$i][] = $side;
     }
 
-    if ($rowCount != 3) {
+    if ($rowCount % 3) {
         continue;
     }
-
-    $rowCount = 0;
 
     foreach ($group as $sides) {
         if (isValid($sides)) {
@@ -36,16 +33,12 @@ while (false !== ($line = fgets($fp))) {
 
 function isValid(array $sides)
 {
-    $count = 0;
-    $total = array_sum($sides);
+    sort($sides);
 
-    foreach ($sides as $i => $side) {
-        if (($total - $side) > $side) {
-            $count++;
-        }
-    }
+    $part   = array_sum(array_slice($sides, 0, 2));
+    $last   = end($sides);
 
-    return ($count == count($sides));
+    return $part > $last;
 }
 
 echo "There is {$validOne} valid row triangles and {$validTwo} valid columns triangles\n";
