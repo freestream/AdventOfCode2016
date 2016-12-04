@@ -57,9 +57,9 @@ function decrypt($text, $shift) {
 
         for ($i = 0; $i < $shift; $i++) {
             if ($value == 122) {
-              $value = 97;
+                $value = 97;
             } else {
-              $value++;
+                $value++;
             }
         }
 
