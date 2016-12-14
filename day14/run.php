@@ -1,5 +1,5 @@
 <?php
-$input      = 'abc';
+$input      = 'ahsbgdzn';
 $i          = 0;
 $firstKeys  = 0;
 $secKeys    = [];
